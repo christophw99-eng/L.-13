@@ -1058,11 +1058,22 @@
 // ─── REIHENFOLGE DER PHASEN ──────────────────────────────
 var PHASE_ORDER = ['ph0','ph1','ph2','ph3','ph4','ph5'];
 
-// ─── PHASE TOGGLE (immer möglich) ────────────────────────
+// ─── PHASE TOGGLE ────────────────────────────────────────
 function togglePhase(id) {
   var card = document.getElementById(id);
   if (!card) return;
-  card.classList.toggle('open');
+  var body = card.querySelector('.phase-body');
+  var arrow = card.querySelector('.phase-toggle');
+  if (!body) return;
+  if (body.style.display === 'block') {
+    body.style.display = 'none';
+    card.classList.remove('open');
+    if (arrow) arrow.style.transform = '';
+  } else {
+    body.style.display = 'block';
+    card.classList.add('open');
+    if (arrow) arrow.style.transform = 'rotate(180deg)';
+  }
 }
 
 // ─── FORTSCHRITT ─────────────────────────────────────────
@@ -1113,16 +1124,4 @@ function isPhaseComplete(phId) {
   var card = document.getElementById(phId);
   if (!card) return true;
   var all = card.querySelectorAll('.ab-check');
-  if (!all.length) return true;
-  return card.querySelectorAll('.ab-check:checked').length === all.length;
-}
-
-function updateLocks() {
-  var lehrerModus = document.body.classList.contains('lehrer-modus');
-
-  for (var i = 0; i < PHASE_ORDER.length; i++) {
-    var phId = PHASE_ORDER[i];
-    var card = document.getElementById(phId);
-    if (!card) continue;
-
-    var phaseUnlocked = lehrerModus || i === 0 || isPhaseComplete(PHASE_OR
+  if (!all.length) return
