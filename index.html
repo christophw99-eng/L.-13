@@ -450,6 +450,34 @@
     main { padding: 20px 12px 40px; }
   }
 
+  /* ─── GESPERRT (Häkchen deaktiviert) ────────────────────── */
+  .ab-check:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: #bbb;
+    background: #eee;
+  }
+  .phase-card.locked .ab-title { color: var(--stein-hell); }
+  .phase-card.locked .ab-item {
+    background: #f5f1ea;
+    border-color: rgba(201,164,77,0.15);
+  }
+  .unlock-hint {
+    font-size: 0.76rem;
+    color: #9A7A6A;
+    font-style: italic;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  @keyframes unlockFlash {
+    0%   { box-shadow: 0 0 0 0 rgba(201,164,77,0.0); }
+    30%  { box-shadow: 0 0 24px 8px rgba(201,164,77,0.6); }
+    100% { box-shadow: 0 6px 24px var(--schatten); }
+  }
+  .just-unlocked { animation: unlockFlash 0.9s ease forwards; }
+
   /* Scrollbar */
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: #1E1510; }
@@ -1028,6 +1056,9 @@
 </main>
 
 <script>
+// ─── REIHENFOLGE DER PHASEN ──────────────────────────────
+const PHASE_ORDER = ['ph0','ph1','ph2','ph3','ph4','ph5'];
+
 // ─── PHASE TOGGLE ────────────────────────────────────────
 function togglePhase(id) {
   const card = document.getElementById(id);
@@ -1052,18 +1083,20 @@ function updateCheck(checkbox, id) {
   if (item) item.classList.toggle('done', checkbox.checked);
   updateProgressBar();
   updatePhaseProgress();
+  updateLocks();
 }
 
 function updateProgressBar() {
-  const all = document.querySelectorAll('.ab-check');
+  const all = document.querySelectorAll('.ab-check:not(:disabled)');
   const done = document.querySelectorAll('.ab-check:checked');
-  const pct = all.length ? (done.length / all.length * 100) : 0;
+  const total = document.querySelectorAll('.ab-check').length;
+  const pct = total ? (done.length / total * 100) : 0;
   document.getElementById('progressBar').style.width = pct + '%';
-  document.getElementById('progressCount').textContent = `${done.length} / ${all.length}`;
+  document.getElementById('progressCount').textContent = `${done.length} / ${total}`;
 }
 
 function updatePhaseProgress() {
-  ['ph0','ph1','ph2','ph3','ph4','ph5'].forEach(phId => {
+  PHASE_ORDER.forEach(phId => {
     const card = document.getElementById(phId);
     if (!card) return;
     const all = card.querySelectorAll('.ab-check');
@@ -1075,49 +1108,21 @@ function updatePhaseProgress() {
   });
 }
 
-function resetProgress() {
-  if (!confirm('Fortschritt wirklich zurücksetzen?')) return;
-  localStorage.removeItem(KEY);
-  document.querySelectorAll('.ab-check').forEach(cb => cb.checked = false);
-  document.querySelectorAll('.ab-item').forEach(item => item.classList.remove('done'));
-  updateProgressBar();
-  updatePhaseProgress();
+// ─── SPERR-LOGIK ─────────────────────────────────────────
+function isPhaseComplete(phId) {
+  const card = document.getElementById(phId);
+  if (!card) return true;
+  const all = card.querySelectorAll('.ab-check');
+  if (!all.length) return true;
+  return card.querySelectorAll('.ab-check:checked').length === all.length;
 }
 
-function restoreProgress() {
-  const data = loadProgress();
-  document.querySelectorAll('[data-id]').forEach(item => {
-    const id = item.dataset.id;
-    const cb = item.querySelector('.ab-check');
-    if (cb && data[id]) {
-      cb.checked = true;
-      item.classList.add('done');
-    }
-  });
-  updateProgressBar();
-  updatePhaseProgress();
-}
+function updateLocks() {
+  // Im Lehrermodus alles freischalten
+  const lehrerModus = document.body.classList.contains('lehrer-modus');
 
-// ─── LEHRER / SCHÜLER ANSICHT ────────────────────────────
-function setView(mode) {
-  document.body.classList.toggle('lehrer-modus', mode === 'lehrer');
-  document.getElementById('btnLehrer').classList.toggle('active', mode === 'lehrer');
-  document.getElementById('btnSchueler').classList.toggle('active', mode === 'schueler');
-  localStorage.setItem('latein_l13_view', mode);
-}
+  PHASE_ORDER.forEach((phId, i) => {
+    const card = document.getElementById(phId);
+    if (!card) return;
 
-// ─── INIT ────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  restoreProgress();
-  const savedView = localStorage.getItem('latein_l13_view') || 'schueler';
-  setView(savedView);
-  // Erste Phase offen lassen, Rest zu
-  ['ph1','ph2','ph3','ph4','ph5','phMat'].forEach(id => {
-    const card = document.getElementById(id);
-    if (card) card.classList.remove('open');
-  });
-  document.getElementById('ph0').classList.add('open');
-});
-</script>
-</body>
-</html>
+    const prevCo
