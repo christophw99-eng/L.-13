@@ -452,9 +452,9 @@
 
   /* ─── GESPERRT (Häkchen deaktiviert) ────────────────────── */
   .ab-check:disabled {
-    opacity: 0.3;
+    opacity: 0.25;
     cursor: not-allowed;
-    border-color: #bbb;
+    border-color: #ccc;
     background: #eee;
   }
   .phase-card.locked .ab-title { color: var(--stein-hell); }
@@ -462,6 +462,13 @@
     background: #f5f1ea;
     border-color: rgba(201,164,77,0.15);
   }
+  .ab-item.item-locked {
+    opacity: 0.5;
+    background: #f5f1ea;
+    border-color: rgba(201,164,77,0.15);
+  }
+  .ab-item.item-locked .ab-title { color: var(--stein-hell); }
+  .ab-item.item-locked .ab-links { pointer-events: none; opacity: 0.4; }
   .unlock-hint {
     font-size: 0.76rem;
     color: #9A7A6A;
@@ -1117,12 +1124,4 @@ function isPhaseComplete(phId) {
   return card.querySelectorAll('.ab-check:checked').length === all.length;
 }
 
-function updateLocks() {
-  // Im Lehrermodus alles freischalten
-  const lehrerModus = document.body.classList.contains('lehrer-modus');
-
-  PHASE_ORDER.forEach((phId, i) => {
-    const card = document.getElementById(phId);
-    if (!card) return;
-
-    const prevCo
+// Sperrt Au
