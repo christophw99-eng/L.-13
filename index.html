@@ -450,33 +450,16 @@
     main { padding: 20px 12px 40px; }
   }
 
-  /* ─── GESPERRT (Häkchen deaktiviert, Header immer klickbar) ── */
-  /* Phase-Header ist IMMER anklickbar – egal ob locked oder nicht */
-  .phase-header {
-    pointer-events: all !important;
-    cursor: pointer !important;
-  }
+  /* ─── GESPERRTE HÄKCHEN & AUFGABEN ─────────────────────── */
   .ab-check:disabled {
     opacity: 0.25;
     cursor: not-allowed;
     border-color: #ccc;
     background: #eee;
   }
-  /* Gesperrte Phase: Inhalt leicht ausgegraut, aber Header offen */
-  .phase-card.locked .phase-body {
-    background: rgba(245,241,234,0.6);
-  }
-  .phase-card.locked .ab-title { color: var(--stein-hell); }
-  .phase-card.locked .ab-item {
-    background: #f5f1ea;
-    border-color: rgba(201,164,77,0.15);
-  }
   .ab-item.item-locked {
-    opacity: 0.5;
-    background: #f5f1ea;
-    border-color: rgba(201,164,77,0.15);
+    opacity: 0.45;
   }
-  .ab-item.item-locked .ab-title { color: var(--stein-hell); }
   .ab-item.item-locked .ab-links { pointer-events: none; opacity: 0.4; }
   .unlock-hint {
     font-size: 0.76rem;
@@ -1073,33 +1056,30 @@
 
 <script>
 // ─── REIHENFOLGE DER PHASEN ──────────────────────────────
-const PHASE_ORDER = ['ph0','ph1','ph2','ph3','ph4','ph5'];
+var PHASE_ORDER = ['ph0','ph1','ph2','ph3','ph4','ph5'];
 
-// ─── PHASE TOGGLE (immer möglich, unabhängig vom Lock-Status) ──
+// ─── PHASE TOGGLE (immer möglich) ────────────────────────
 function togglePhase(id) {
-  const card = document.getElementById(id);
+  var card = document.getElementById(id);
   if (!card) return;
   card.classList.toggle('open');
-  // Pfeil-Rotation direkt am Toggle-Element erzwingen
-  const toggle = card.querySelector('.phase-toggle');
-  if (toggle) toggle.style.transform = card.classList.contains('open') ? 'rotate(180deg)' : '';
 }
 
 // ─── FORTSCHRITT ─────────────────────────────────────────
-const KEY = 'latein_l13_progress';
+var KEY = 'latein_l13_progress';
 
 function loadProgress() {
-  try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
+  try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; }
 }
 function saveProgress(data) {
-  localStorage.setItem(KEY, JSON.stringify(data));
+  try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e) {}
 }
 
 function updateCheck(checkbox, id) {
-  const data = loadProgress();
+  var data = loadProgress();
   data[id] = checkbox.checked;
   saveProgress(data);
-  const item = document.querySelector(`[data-id="${id}"]`);
+  var item = document.querySelector('[data-id="' + id + '"]');
   if (item) item.classList.toggle('done', checkbox.checked);
   updateProgressBar();
   updatePhaseProgress();
@@ -1107,22 +1087,42 @@ function updateCheck(checkbox, id) {
 }
 
 function updateProgressBar() {
-  const all = document.querySelectorAll('.ab-check:not(:disabled)');
-  const done = document.querySelectorAll('.ab-check:checked');
-  const total = document.querySelectorAll('.ab-check').length;
-  const pct = total ? (done.length / total * 100) : 0;
+  var all = document.querySelectorAll('.ab-check');
+  var done = document.querySelectorAll('.ab-check:checked');
+  var pct = all.length ? (done.length / all.length * 100) : 0;
   document.getElementById('progressBar').style.width = pct + '%';
-  document.getElementById('progressCount').textContent = `${done.length} / ${total}`;
+  document.getElementById('progressCount').textContent = done.length + ' / ' + all.length;
 }
 
 function updatePhaseProgress() {
-  PHASE_ORDER.forEach(phId => {
-    const card = document.getElementById(phId);
-    if (!card) return;
-    const all = card.querySelectorAll('.ab-check');
-    const done = card.querySelectorAll('.ab-check:checked');
-    const el = document.getElementById('prog-' + phId);
+  for (var p = 0; p < PHASE_ORDER.length; p++) {
+    var phId = PHASE_ORDER[p];
+    var card = document.getElementById(phId);
+    if (!card) continue;
+    var all = card.querySelectorAll('.ab-check');
+    var done = card.querySelectorAll('.ab-check:checked');
+    var el = document.getElementById('prog-' + phId);
     if (el && all.length) {
-      el.textContent = `${done.length} von ${all.length} erledigt`;
+      el.textContent = done.length + ' von ' + all.length + ' erledigt';
     }
-  });
+  }
+}
+
+// ─── SPERR-LOGIK ─────────────────────────────────────────
+function isPhaseComplete(phId) {
+  var card = document.getElementById(phId);
+  if (!card) return true;
+  var all = card.querySelectorAll('.ab-check');
+  if (!all.length) return true;
+  return card.querySelectorAll('.ab-check:checked').length === all.length;
+}
+
+function updateLocks() {
+  var lehrerModus = document.body.classList.contains('lehrer-modus');
+
+  for (var i = 0; i < PHASE_ORDER.length; i++) {
+    var phId = PHASE_ORDER[i];
+    var card = document.getElementById(phId);
+    if (!card) continue;
+
+    var phaseUnlocked = lehrerModus || i === 0 || isPhaseComplete(PHASE_OR
