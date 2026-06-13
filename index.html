@@ -450,12 +450,21 @@
     main { padding: 20px 12px 40px; }
   }
 
-  /* ─── GESPERRT (Häkchen deaktiviert) ────────────────────── */
+  /* ─── GESPERRT (Häkchen deaktiviert, Header immer klickbar) ── */
+  /* Phase-Header ist IMMER anklickbar – egal ob locked oder nicht */
+  .phase-header {
+    pointer-events: all !important;
+    cursor: pointer !important;
+  }
   .ab-check:disabled {
     opacity: 0.25;
     cursor: not-allowed;
     border-color: #ccc;
     background: #eee;
+  }
+  /* Gesperrte Phase: Inhalt leicht ausgegraut, aber Header offen */
+  .phase-card.locked .phase-body {
+    background: rgba(245,241,234,0.6);
   }
   .phase-card.locked .ab-title { color: var(--stein-hell); }
   .phase-card.locked .ab-item {
@@ -1066,10 +1075,14 @@
 // ─── REIHENFOLGE DER PHASEN ──────────────────────────────
 const PHASE_ORDER = ['ph0','ph1','ph2','ph3','ph4','ph5'];
 
-// ─── PHASE TOGGLE ────────────────────────────────────────
+// ─── PHASE TOGGLE (immer möglich, unabhängig vom Lock-Status) ──
 function togglePhase(id) {
   const card = document.getElementById(id);
+  if (!card) return;
   card.classList.toggle('open');
+  // Pfeil-Rotation direkt am Toggle-Element erzwingen
+  const toggle = card.querySelector('.phase-toggle');
+  if (toggle) toggle.style.transform = card.classList.contains('open') ? 'rotate(180deg)' : '';
 }
 
 // ─── FORTSCHRITT ─────────────────────────────────────────
@@ -1113,15 +1126,3 @@ function updatePhaseProgress() {
       el.textContent = `${done.length} von ${all.length} erledigt`;
     }
   });
-}
-
-// ─── SPERR-LOGIK ─────────────────────────────────────────
-function isPhaseComplete(phId) {
-  const card = document.getElementById(phId);
-  if (!card) return true;
-  const all = card.querySelectorAll('.ab-check');
-  if (!all.length) return true;
-  return card.querySelectorAll('.ab-check:checked').length === all.length;
-}
-
-// Sperrt Au
