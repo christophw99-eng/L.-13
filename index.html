@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pontes L. 13 – Konnten die Römer in die Zukunft sehen?</title>
+<style>
+  :root {
+    --rot: #8B1A1A;
+    --gold: #C9A44D;
+    --gold-hell: #F0D88A;
+    --pergament: #F7EDD8;
+    --pergament-dunkel: #EDD9A3;
+    --stein: #3D3435;
+    --stein-hell: #6B5B55;
+    --weiss: #FDF8F0;
+    --schatten: rgba(61,52,53,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background-color: #2A1F1A;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(139,26,26,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(201,164,77,0.10) 0%, transparent 60%);
+    min-height: 100vh;
+    color: var(--stein);
+  }
+
+  /* ─── HEADER ────────────────────────────────────────────── */
+  header {
+    background: linear-gradient(135deg, var(--rot) 0%, #5C0F0F 60%, #3A0808 100%);
+    padding: 40px 24px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 4px solid var(--gold);
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      90deg, transparent, transparent 40px,
+      rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px
+    );
+  }
+  .header-ornament {
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.85;
+  }
+  header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.6rem);
+    color: var(--weiss);
+    line-height: 1.25;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  header h1 em {
+    color: var(--gold-hell);
+    font-style: normal;
+  }
+  .subtitle {
+    color: var(--pergament-dunkel);
+    font-size: 1rem;
+    opacity: 0.85;
+    margin-top: 4px;
+  }
+  .leitfrage-badge {
+    display: inline-block;
+    margin-top: 20px;
+    background: var(--gold);
+    color: var(--stein);
+    font-size: 1.05rem;
+    font-weight: bold;
+    padding: 10px 28px;
+    border-radius: 40px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .leitfrage-badge span { font-style: italic; }
+
+  /* ─── FORTSCHRITTSBALKEN ─────────────────────────────────── */
+  .progress-container {
+    background: #1E1510;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 2px solid var(--gold);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .progress-label {
+    color: var(--gold);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    min-width: 90px;
+  }
+  .progress-bar-outer {
+    flex: 1;
+    height: 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(201,164,77,0.3);
+  }
+  .progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-hell));
+    border-radius: 6px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+  .progress-count {
+    color: var(--gold);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    min-width: 55px;
+    text-align: right;
+  }
+  .reset-btn {
+    background: none;
+    border: 1px solid rgba(201,164,77,0.4);
+    color: var(--gold);
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .reset-btn:hover { background: rgba(201,164,77,0.15); }
+
+  /* ─── HAUPT-LAYOUT ───────────────────────────────────────── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* ─── PHASEN-KARTE ──────────────────────────────────────── */
+  .phase-card {
+    background: var(--pergament);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px var(--schatten), 0 1px 0 rgba(255,255,255,0.1);
+    border: 1px solid rgba(201,164,77,0.3);
+  }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 24px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .phase-header:hover { background: rgba(139,26,26,0.06); }
+  .phase-num {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--weiss);
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .phase-title-block { flex: 1; }
+  .phase-title { font-size: 1.15rem; font-weight: bold; }
+  .phase-desc { font-size: 0.82rem; color: var(--stein-hell); margin-top: 3px; }
+  .phase-toggle {
+    color: var(--stein-hell);
+    font-size: 1.3rem;
+    transition: transform 0.3s;
+  }
+  .phase-card.open .phase-toggle { transform: rotate(180deg); }
+  .phase-progress-mini {
+    font-size: 0.78rem;
+    color: var(--stein-hell);
+    margin-top: 4px;
+  }
+
+  .phase-body {
+    display: none;
+    padding: 0 24px 24px;
+    border-top: 1px solid rgba(201,164,77,0.25);
+  }
+  .phase-card.open .phase-body { display: block; }
+
+  /* Farben pro Phase */
+  .ph0 .phase-num { background: #5A5A8A; }
+  .ph0 .phase-header { border-left: 5px solid #5A5A8A; }
+  .ph1 .phase-num { background: #2E6B3E; }
+  .ph1 .phase-header { border-left: 5px solid #2E6B3E; }
+  .ph2 .phase-num { background: #7A4E1A; }
+  .ph2 .phase-header { border-left: 5px solid #7A4E1A; }
+  .ph3 .phase-num { background: var(--rot); }
+  .ph3 .phase-header { border-left: 5px solid var(--rot); }
+  .ph4 .phase-num { background: #1A5C7A; }
+  .ph4 .phase-header { border-left: 5px solid #1A5C7A; }
+  .ph5 .phase-num { background: #5A1A7A; }
+  .ph5 .phase-header { border-left: 5px solid #5A1A7A; }
+
+  /* ─── AUFGABEN-RASTER ────────────────────────────────────── */
+  .ab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .ab-item {
+    background: var(--weiss);
+    border-radius: 8px;
+    padding: 14px 16px;
+    border: 1.5px solid rgba(201,164,77,0.3);
+    transition: all 0.2s;
+    position: relative;
+  }
+  .ab-item:hover { border-color: var(--gold); box-shadow: 0 3px 12px var(--schatten); }
+  .ab-item.done {
+    background: #F0F7F0;
+    border-color: #7AAD7A;
+    opacity: 0.75;
+  }
+  .ab-item.done .ab-title { text-decoration: line-through; color: var(--stein-hell); }
+
+  .ab-check-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .ab-check {
+    width: 20px; height: 20px;
+    border-radius: 4px;
+    border: 2px solid var(--gold);
+    cursor: pointer;
+    flex-shrink: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    background: white;
+    margin-top: 1px;
+    transition: all 0.15s;
+  }
+  .ab-check:checked {
+    background: #5A9E5A;
+    border-color: #5A9E5A;
+  }
+  .ab-check:checked::after {
+    content: '✓';
+    color: white;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    line-height: 1;
+    margin-top: -1px;
+    margin-left: 2px;
+  }
+  .ab-text { flex: 1; }
+  .ab-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--stein);
+    line-height: 1.35;
+  }
+  .ab-sub {
+    font-size: 0.78rem;
+    color: var(--stein-hell);
+    margin-top: 3px;
+    font-style: italic;
+  }
+  .ab-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .ab-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.15s;
+    font-family: 'Georgia', serif;
+  }
+  .ab-link.pdf {
+    background: #FEF0F0;
+    color: var(--rot);
+    border: 1px solid rgba(139,26,26,0.25);
+  }
+  .ab-link.pdf:hover { background: var(--rot); color: white; }
+  .ab-link.docx {
+    background: #EEF4FC;
+    color: #1A4E8A;
+    border: 1px solid rgba(26,78,138,0.25);
+  }
+  .ab-link.docx:hover { background: #1A4E8A; color: white; }
+  .ab-link.lsg {
+    background: #F0F7F0;
+    color: #2E6B3E;
+    border: 1px solid rgba(46,107,62,0.25);
+  }
+  .ab-link.lsg:hover { background: #2E6B3E; color: white; }
+
+  /* ─── HINWEIS-BOXEN ──────────────────────────────────────── */
+  .hinweis {
+    background: rgba(201,164,77,0.12);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 0.84rem;
+    color: #5A4A1A;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+  .hinweis strong { color: var(--rot); }
+
+  /* ─── GRAMMATICUS-BLOCK ───────────────────────────────────── */
+  .grammaticus-block {
+    background: linear-gradient(135deg, #F7EDD8, #F0D9B0);
+    border: 1.5px dashed var(--gold);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .grammaticus-icon { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
+  .grammaticus-text h4 { font-size: 0.9rem; color: var(--rot); margin-bottom: 4px; }
+  .grammaticus-text p { font-size: 0.82rem; color: var(--stein-hell); line-height: 1.4; }
+
+  /* ─── SECTION-LABEL ──────────────────────────────────────── */
+  .section-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--stein-hell);
+    margin-top: 20px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(201,164,77,0.3);
+  }
+
+  /* ─── INFO-LEISTE OBEN ───────────────────────────────────── */
+  .info-banner {
+    background: linear-gradient(135deg, #1E2A1E, #0F1A0F);
+    border: 1px solid rgba(90,158,90,0.3);
+    border-radius: 10px;
+    padding: 16px 22px;
+    color: #A8D4A8;
+    font-size: 0.85rem;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .info-item { display: flex; align-items: center; gap: 8px; }
+  .info-icon { font-size: 1.2rem; }
+
+  /* ─── LEHRER-ANSICHT-TOGGLE ───────────────────────────────── */
+  .view-toggle {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+  }
+  .view-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1.5px solid rgba(201,164,77,0.4);
+    background: transparent;
+    color: var(--gold);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Georgia', serif;
+  }
+  .view-btn.active { background: var(--gold); color: var(--stein); font-weight: bold; }
+  .lehrer-only { display: none; }
+  body.lehrer-modus .lehrer-only { display: block; }
+  body.lehrer-modus .ab-item.lehrer-only { display: flex; flex-direction: column; }
+
+  /* ─── NOTIZ-FELD ─────────────────────────────────────────── */
+  .notiz-feld {
+    width: 100%;
+    min-height: 70px;
+    border: 1px solid rgba(201,164,77,0.4);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: 'Georgia', serif;
+    font-size: 0.82rem;
+    background: rgba(255,255,255,0.6);
+    color: var(--stein);
+    resize: vertical;
+    margin-top: 10px;
+  }
+  .notiz-label { font-size: 0.75rem; color: var(--stein-hell); margin-top: 12px; }
+
+  /* ─── LEITFRAGE ANTWORT ───────────────────────────────────── */
+  .leitfrage-panel {
+    background: linear-gradient(135deg, #1A1A3A, #0A0A2A);
+    border-radius: 12px;
+    padding: 28px 30px;
+    color: var(--weiss);
+    border: 2px solid rgba(90,90,180,0.4);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .leitfrage-panel h2 {
+    color: #A0A0FF;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .leitfrage-panel .frage {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--gold-hell);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .leitfrage-panel p {
+    font-size: 0.88rem;
+    color: #C0C0E0;
+    line-height: 1.6;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .ab-grid { grid-template-columns: 1fr; }
+    .progress-container { flex-wrap: wrap; }
+    header { padding: 28px 16px; }
+    main { padding: 20px 12px 40px; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #1E1510; }
+  ::-webkit-scrollbar-thumb { background: var(--rot); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-ornament">✦ Pontes · Lektion 13 · Futur I ✦</div>
+  <h1>Das Futur – <em>Ein Blick in die Zukunft</em></h1>
+  <div class="subtitle">Offene Unterrichtseinheit · Klasse 7 · Lateinisch</div>
+  <div class="leitfrage-badge">🔮 Leitfrage: <span>„Konnten die Römer in die Zukunft sehen?"</span></div>
+</header>
+
+<!-- FORTSCHRITTSLEISTE -->
+<div class="progress-container">
+  <span class="progress-label">📋 Fortschritt</span>
+  <div class="progress-bar-outer">
+    <div class="progress-bar-inner" id="progressBar"></div>
+  </div>
+  <span class="progress-count" id="progressCount">0 / 0</span>
+  <button class="reset-btn" onclick="resetProgress()">Zurücksetzen</button>
+</div>
+
+<main>
+
+  <!-- VIEW TOGGLE -->
+  <div class="view-toggle">
+    <button class="view-btn active" id="btnSchueler" onclick="setView('schueler')">👨‍🎓 Schüleransicht</button>
+    <button class="view-btn" id="btnLehrer" onclick="setView('lehrer')">👨‍🏫 Lehreransicht</button>
+  </div>
+
+  <!-- LEITFRAGE PANEL -->
+  <div class="leitfrage-panel">
+    <h2>🔮 Die Leitfrage</h2>
+    <div class="frage">„Konnten die Römer in die Zukunft sehen?"</div>
+    <p>Diese Frage begleitet euch durch die gesamte Einheit. Die Antwort darauf erschließt ihr Schritt für Schritt: durch die Grammatik des Futurs, den Lektionstext über Aeneas' Orakelbesuch und die inhaltlichen Analyseaufgaben. Am Ende der Einheit präsentiert ihr eure Antwort den Mitschülerinnen und Mitschülern.</p>
+  </div>
+
+  <!-- INFO-BANNER -->
+  <div class="info-banner">
+    <div class="info-item"><span class="info-icon">📚</span> Pontes Bd. 1 · L. 13</div>
+    <div class="info-item"><span class="info-icon">⏱️</span> 6–8 Stunden</div>
+    <div class="info-item"><span class="info-icon">🎯</span> Grammatik: Futur I (und Futur II)</div>
+    <div class="info-item"><span class="info-icon">📜</span> Text: Rede des Aeneas beim Orakel</div>
+    <div class="info-item"><span class="info-icon">🔓</span> Freie Reihenfolge möglich</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PHASE 0: EINSTIEG
+  ══════════════════════════════════════════════════════════ -->
+  <div class="phase-card ph0 open" id="ph0">
+    <div class="phase-header" onclick="togglePhase('ph0')">
+      <div class="phase-num">✦</div>
+      <div class="phase-title-block">
+        <div class="phase-title">Einstieg in die Einheit</div>
+        <div class="phase-desc">Leitfrage kennenlernen · Lernplan erhalten · Erwartungen klären</div>
+        <div class="phase-progress-mini" id="prog-ph0"></div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="ab-grid">
+        <div class="ab-item" data-id="e1">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'e1')">
+            <div class="ab-text">
+              <div class="ab-title">Lernplan ausgeteilt</div>
+              <div class="ab-sub">Schüler erhalten ihren persönlichen Laufzettel</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="Lernplan ganz neu.pdf" target="_blank">📄 Lernplan (PDF)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="e2">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'e2')">
+            <div class="ab-text">
+              <div class="ab-title">Leitfrage eingeführt</div>
+              <div class="ab-sub">Bild eines Auguren zeigen · Vorwissen aktivieren · Freiarbeit erklären</div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="e3">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'e3')">
+            <div class="ab-text">
+              <div class="ab-title">AB 0: Aufgabenblatt + Auswertung</div>
+              <div class="ab-sub">Erste Analyse neuer Formen – Entdeckungsaufgabe</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grammaticus-block lehrer-only">
+        <div class="grammaticus-icon">📝</div>
+        <div class="grammaticus-text">
+          <h4>Lehrerhinweis – Einstiegsstunde</h4>
+          <p>Zeigen Sie ein Bild eines römischen Auguren oder Opferrituals. Sammeln Sie Vorwissen: <em>„Was wisst ihr über römischen Aberglauben?"</em> Dann Leitfrage vorstellen und Laufzettel verteilen. Erklären, dass Lernbereiche A–D weitgehend frei wählbar sind.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PHASE 1: ENTDECKUNG – DAS FUTUR ERARBEITEN
+  ══════════════════════════════════════════════════════════ -->
+  <div class="phase-card ph1" id="ph1">
+    <div class="phase-header" onclick="togglePhase('ph1')">
+      <div class="phase-num">I</div>
+      <div class="phase-title-block">
+        <div class="phase-title">Alles neu??? – Die Erkundung</div>
+        <div class="phase-desc">Futur I entdecken · Formen erarbeiten · Beim Grammaticus absichern</div>
+        <div class="phase-progress-mini" id="prog-ph1"></div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="section-label">Entdeckungsaufgaben</div>
+      <div class="ab-grid">
+        <div class="ab-item" data-id="ab1">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab1')">
+            <div class="ab-text">
+              <div class="ab-title">AB 1: Hodie</div>
+              <div class="ab-sub">Präsensformen erkennen und verstehen</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 01 Hodie.pdf" target="_blank">📄 AB 1 (PDF)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="ab2">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab2')">
+            <div class="ab-text">
+              <div class="ab-title">AB 2: Cras</div>
+              <div class="ab-sub">Futurformen entdecken und vergleichen</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 02 Cras.pdf" target="_blank">📄 AB 2 (PDF)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="ab3a">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab3a')">
+            <div class="ab-text">
+              <div class="ab-title">AB 3a: Sicherung – Weg A</div>
+              <div class="ab-sub">Für Schüler, die schneller voranschreiten</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 03a Sicherung Weg A.pdf" target="_blank">📄 AB 3a (PDF)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="ab3b">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab3b')">
+            <div class="ab-text">
+              <div class="ab-title">AB 3b: Sicherung – Weg B</div>
+              <div class="ab-sub">Geführtere Sicherung mit mehr Unterstützung</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 03b Sicherung Weg B.pdf" target="_blank">📄 AB 3b (PDF)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grammaticus-block">
+        <div class="grammaticus-icon">🏛️</div>
+        <div class="grammaticus-text">
+          <h4>Besuch Nr. 1 beim Grammaticus</h4>
+          <p>Schüler kommen mit AB 3a/b zum Lehrer → erhalten AB 4 (Grammatik-Einführung Futur I)</p>
+        </div>
+      </div>
+      <div class="grammaticus-block">
+        <div class="grammaticus-icon">🏛️</div>
+        <div class="grammaticus-text">
+          <h4>Besuch Nr. 2 beim Grammaticus</h4>
+          <p>Schüler kommen mit ausgefülltem AB 4 → gemeinsame Besprechung und Kontrolle</p>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-top:20px">Vertiefung & Kontrolle</div>
+      <div class="ab-grid">
+        <div class="ab-item" data-id="ab4">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab4')">
+            <div class="ab-text">
+              <div class="ab-title">AB 4: Grammatik-Einführung Futur I</div>
+              <div class="ab-sub">Erhalten vom Grammaticus nach Besuch 1</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="Einführung Futur II.pdf" target="_blank">📄 Einführung Futur (PDF)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="ab5">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab5')">
+            <div class="ab-text">
+              <div class="ab-title">AB 5: Zeig, was Du kannst!</div>
+              <div class="ab-sub">Futurübung Trainingslager – Selbstkontrolle</div>
+              <div class="ab-links">
+                <a class="ab-link docx" href="AB 05 26-05-05 Futurübung Trainingslager.docx" target="_blank">📝 AB 5 (DOCX)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="verbarium">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'verbarium')">
+            <div class="ab-text">
+              <div class="ab-title">Verbarium</div>
+              <div class="ab-sub">Verbformen üben und stempeln</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="Verbarium_Uebungsmaterial.pdf" target="_blank">📄 Übungsmaterial</a>
+                <a class="ab-link pdf" href="Verbarium_Stempelblatt.pdf" target="_blank">📄 Stempelblatt</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grammaticus-block">
+        <div class="grammaticus-icon">🏛️</div>
+        <div class="grammaticus-text">
+          <h4>Besuch Nr. 3 beim Grammaticus</h4>
+          <p>Schüler zeigen AB 5 → Kontrolle → Freigabe für Phase 2</p>
+        </div>
+      </div>
+
+      <div class="hinweis lehrer-only">
+        <strong>Differenzierung:</strong> Schüler mit Bedarf können länger bei AB 3b bleiben. Schnelle Schüler starten parallel mit Verbarium oder AB 6.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PHASE 2: VORBEREITUNG DES ORAKELS
+  ══════════════════════════════════════════════════════════ -->
+  <div class="phase-card ph2" id="ph2">
+    <div class="phase-header" onclick="togglePhase('ph2')">
+      <div class="phase-num">II</div>
+      <div class="phase-title-block">
+        <div class="phase-title">Ab zum Orakel – Vorbereitung ist alles!</div>
+        <div class="phase-desc">Vokabeln · Grammatik · Eigenen Arbeitsplatz ordnen</div>
+        <div class="phase-progress-mini" id="prog-ph2"></div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="ab-grid">
+        <div class="ab-item" data-id="ab6">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab6')">
+            <div class="ab-text">
+              <div class="ab-title">AB 6: Vokabeldomino</div>
+              <div class="ab-sub">Wortschatz L. 13 – „Rede des Aeneas"</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 06 Vokabeldomino_L13 Rede des Aeneas.pdf" target="_blank">📄 AB 6 (PDF)</a>
+                <a class="ab-link pdf" href="Vokabeldomino L. 13 komplett.PDF" target="_blank">📄 Domino komplett</a>
+                <a class="ab-link pdf" href="Vokabeldomino_L13_Teil2.pdf" target="_blank">📄 Domino Teil 2</a>
+                <a class="ab-link docx" href="Vokabeln L. 13.docx" target="_blank">📝 Vokabeln (DOCX)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="ab7">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab7')">
+            <div class="ab-text">
+              <div class="ab-title">AB 7: Grammatikvorbereitung</div>
+              <div class="ab-sub">Vorbereitung der Übersetzung – Grammatik-Wiederholung</div>
+              <div class="ab-links">
+                <a class="ab-link docx" href="AB 07 26-05-06 Vorbereitung der Übersetzung 2 Grammatik.docx" target="_blank">📝 AB 7 (DOCX)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="ab8">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab8')">
+            <div class="ab-text">
+              <div class="ab-title">AB 8: Eigener Arbeitsplatz ordnen</div>
+              <div class="ab-sub">Alle Materialien sortieren → Foto an Grammaticus schicken!</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 08  Station Arbeitsplatz ordnen.pdf" target="_blank">📄 AB 8 (PDF)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hinweis">
+        💡 <strong>Tipp:</strong> AB 6, 7 und 8 können in freier Reihenfolge bearbeitet werden. AB 8 markiert die Bereitschaft für die Übersetzungsphase.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PHASE 3: DAS ORAKEL ENTSCHLÜSSELN
+  ══════════════════════════════════════════════════════════ -->
+  <div class="phase-card ph3" id="ph3">
+    <div class="phase-header" onclick="togglePhase('ph3')">
+      <div class="phase-num">III</div>
+      <div class="phase-title-block">
+        <div class="phase-title">Das Orakel entschlüsseln</div>
+        <div class="phase-desc">Lektionstext übersetzen · Vergleichen · Mit Grammaticus besprechen</div>
+        <div class="phase-progress-mini" id="prog-ph3"></div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="section-label">Übersetzung</div>
+      <div class="ab-grid">
+        <div class="ab-item" data-id="ab9a">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab9a')">
+            <div class="ab-text">
+              <div class="ab-title">AB 9: Übersetzung (ohne Hilfen)</div>
+              <div class="ab-sub">Für Schüler, die selbstständig übersetzen können</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 09 ohne Hilfen.pdf" target="_blank">📄 AB 9 ohne Hilfen</a>
+                <a class="ab-link docx" href="AB 09 ohne Hilfen.docx" target="_blank">📝 DOCX</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="ab9b">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab9b')">
+            <div class="ab-text">
+              <div class="ab-title">AB 9: Übersetzung (wenig Hilfen)</div>
+              <div class="ab-sub">Mit Vokabelangaben und Konstruktionshilfen</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 09 wenig Hilfen.pdf" target="_blank">📄 AB 9 wenig Hilfen</a>
+                <a class="ab-link docx" href="AB 09 wenig Hilfen.docx" target="_blank">📝 DOCX</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="textblatt">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'textblatt')">
+            <div class="ab-text">
+              <div class="ab-title">Textblatt L. 13</div>
+              <div class="ab-sub">Lateinischer Originaltext</div>
+              <div class="ab-links">
+                <a class="ab-link docx" href="Textblatt l. 13.docx" target="_blank">📝 Textblatt</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grammaticus-block">
+        <div class="grammaticus-icon">🏛️</div>
+        <div class="grammaticus-text">
+          <h4>Besuch Nr. 4 beim Grammaticus</h4>
+          <p>Schüler zeigen ihre fertige Übersetzung → individuelle Rückmeldung</p>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-top:20px">Übersetzungsvergleich</div>
+      <div class="ab-grid">
+        <div class="ab-item" data-id="ab10">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab10')">
+            <div class="ab-text">
+              <div class="ab-title">AB 10: Übersetzungsvergleich</div>
+              <div class="ab-sub">Eigene Übersetzung mit anderen vergleichen und verbessern</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 10 Übersetzungsvergleich.pdf" target="_blank">📄 AB 10 (PDF)</a>
+                <a class="ab-link docx" href="AB 10 Übersetzungsvergleich.docx" target="_blank">📝 DOCX</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PHASE 4: DAS ORAKEL VERSTEHEN
+  ══════════════════════════════════════════════════════════ -->
+  <div class="phase-card ph4" id="ph4">
+    <div class="phase-header" onclick="togglePhase('ph4')">
+      <div class="phase-num">IV</div>
+      <div class="phase-title-block">
+        <div class="phase-title">Das Orakel verstehen</div>
+        <div class="phase-desc">Auswertungsaufgaben · Inhaltliche Analyse · Leitfrage beantworten</div>
+        <div class="phase-progress-mini" id="prog-ph4"></div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="section-label">AB 11 – Auswertung des Orakelspruchs (freie Wahl)</div>
+      <div class="ab-grid">
+        <div class="ab-item" data-id="ab11a">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab11a')">
+            <div class="ab-text">
+              <div class="ab-title">AB 11a: Orakel-Profil</div>
+              <div class="ab-sub">Profil des Orakels / der Prophezeiung erstellen</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 11a Orakel-Profil.pdf" target="_blank">📄 Aufgabe</a>
+                <a class="ab-link lsg" href="AB 11a Orakel-Profil Lösung.pdf" target="_blank">✓ Lösung</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="ab11b">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab11b')">
+            <div class="ab-text">
+              <div class="ab-title">AB 11b: Wahr oder falsch?</div>
+              <div class="ab-sub">Aussagen zum Text überprüfen und begründen</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 11b Wahr oder falsch.pdf" target="_blank">📄 Aufgabe</a>
+                <a class="ab-link lsg" href="AB 11b Wahr oder falsch Lösung.pdf" target="_blank">✓ Lösung</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="ab11c">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab11c')">
+            <div class="ab-text">
+              <div class="ab-title">AB 11c: Zeitstrahl</div>
+              <div class="ab-sub">Prophezeiungen in einen Zeitstrahl einordnen</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 11c Zeitstrahl.pdf" target="_blank">📄 Aufgabe</a>
+                <a class="ab-link lsg" href="AB 11c Zeitstrahl Lösung.pdf" target="_blank">✓ Lösung</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="ab11d">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab11d')">
+            <div class="ab-text">
+              <div class="ab-title">AB 11d: Innerer Monolog</div>
+              <div class="ab-sub">Kreatives Schreiben – Gedanken des Aeneas nach dem Orakel</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="AB 11d Innerer Monolog.pdf" target="_blank">📄 Aufgabe</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hinweis">
+        💡 <strong>Freie Wahl:</strong> Schüler bearbeiten mindestens <strong>zwei</strong> der vier Aufgaben aus AB 11. Wer Zeit hat, kann alle vier bearbeiten.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PHASE 5: ABSCHLUSS
+  ══════════════════════════════════════════════════════════ -->
+  <div class="phase-card ph5" id="ph5">
+    <div class="phase-header" onclick="togglePhase('ph5')">
+      <div class="phase-num">V</div>
+      <div class="phase-title-block">
+        <div class="phase-title">Sprich zu deinen Gefährten!</div>
+        <div class="phase-desc">Antwort auf die Leitfrage präsentieren · Reflexion</div>
+        <div class="phase-progress-mini" id="prog-ph5"></div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="ab-grid">
+        <div class="ab-item" data-id="praes">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'praes')">
+            <div class="ab-text">
+              <div class="ab-title">Antwort auf die Leitfrage präsentieren</div>
+              <div class="ab-sub">Kurze Präsentation, Plakat oder strukturierter Hefteintrag</div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="reflexion">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'reflexion')">
+            <div class="ab-text">
+              <div class="ab-title">Reflexion & Feedback</div>
+              <div class="ab-sub">Lernprozess reflektieren · Selbst- und Peerevaluation</div>
+              <div class="ab-links">
+                <a class="ab-link pdf" href="Umfrage_Reflexion_Einheit.pdf" target="_blank">📄 Reflexionsbogen</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-item" data-id="test">
+          <div class="ab-check-row">
+            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'test')">
+            <div class="ab-text">
+              <div class="ab-title">Test: Futur Bilderegel</div>
+              <div class="ab-sub">Optionale Lernkontrolle</div>
+              <div class="ab-links">
+                <a class="ab-link docx" href="Test Futur Bilderegel.docx" target="_blank">📝 Test</a>
+                <a class="ab-link lsg" href="Test Futur Bilderegel Lösung.docx" target="_blank">✓ Lösung</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hinweis lehrer-only">
+        <strong>Abschlussstunde:</strong> Schüler präsentieren ihre Antworten. Mögliche Formate: kurze mündliche Präsentation (2–3 Min.), Plakat, strukturierter Hefteintrag. Lehrkraft moderiert die Diskussion und ergänzt fehlende Aspekte. Abschließend Lernprozessreflexion (5 Min.).
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       ALLE MATERIALIEN (ÜBERSICHT)
+  ══════════════════════════════════════════════════════════ -->
+  <div class="phase-card" id="phMat" style="border-color: rgba(201,164,77,0.5);">
+    <div class="phase-header" onclick="togglePhase('phMat')" style="border-left: 5px solid var(--gold);">
+      <div class="phase-num" style="background: #6B5B10; font-size: 1rem;">📂</div>
+      <div class="phase-title-block">
+        <div class="phase-title">Alle Materialien – Schnellzugriff</div>
+        <div class="phase-desc">Sämtliche PDFs und Dokumente der Einheit im Überblick</div>
+      </div>
+      <div class="phase-toggle">▾</div>
+    </div>
+    <div class="phase-body">
+      <div class="ab-grid" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));">
+        <div style="padding:10px 0; font-size:0.82rem;"><div class="section-label" style="margin-top:4px">Lernplanung</div>
+          <a class="ab-link pdf" href="Lernplan ganz neu.pdf" target="_blank">📄 Lernplan</a>
+        </div>
+        <div style="padding:10px 0; font-size:0.82rem;"><div class="section-label" style="margin-top:4px">Grammatik</div>
+          <a class="ab-link pdf" href="Einführung Futur II.pdf" target="_blank">📄 Einführung Futur</a>
+          <div style="margin-top:6px"><a class="ab-link docx" href="AB 05 26-05-05 Futurübung Trainingslager.docx" target="_blank">📝 AB 5 Training</a></div>
+          <div style="margin-top:6px"><a class="ab-link docx" href="AB 07 26-05-06 Vorbereitung der Übersetzung 2 Grammatik.docx" target="_blank">📝 AB 7 Grammatik</a></div>
+        </div>
+        <div style="padding:10px 0; font-size:0.82rem;"><div class="section-label" style="margin-top:4px">Verbarium</div>
+          <a class="ab-link pdf" href="Verbarium_Uebungsmaterial.pdf" target="_blank">📄 Übungsmaterial</a>
+          <div style="margin-top:6px"><a class="ab-link pdf" href="Verbarium_Stempelblatt.pdf" target="_blank">📄 Stempelblatt</a></div>
+        </div>
+        <div style="padding:10px 0; font-size:0.82rem;"><div class="section-label" style="margin-top:4px">Vokabeln</div>
+          <a class="ab-link pdf" href="AB 06 Vokabeldomino_L13 Rede des Aeneas.pdf" target="_blank">📄 Domino AB 6</a>
+          <div style="margin-top:6px"><a class="ab-link pdf" href="Vokabeldomino L. 13 komplett.PDF" target="_blank">📄 Domino komplett</a></div>
+          <div style="margin-top:6px"><a class="ab-link pdf" href="Vokabeldomino_L13_Teil2.pdf" target="_blank">📄 Domino Teil 2</a></div>
+          <div style="margin-top:6px"><a class="ab-link docx" href="Vokabeln L. 13.docx" target="_blank">📝 Vokabelliste</a></div>
+        </div>
+        <div style="padding:10px 0; font-size:0.82rem;"><div class="section-label" style="margin-top:4px">Übersetzung</div>
+          <a class="ab-link pdf" href="AB 09 ohne Hilfen.pdf" target="_blank">📄 AB 9 ohne Hilfen</a>
+          <div style="margin-top:6px"><a class="ab-link pdf" href="AB 09 wenig Hilfen.pdf" target="_blank">📄 AB 9 wenig Hilfen</a></div>
+          <div style="margin-top:6px"><a class="ab-link pdf" href="AB 10 Übersetzungsvergleich.pdf" target="_blank">📄 AB 10 Vergleich</a></div>
+          <div style="margin-top:6px"><a class="ab-link docx" href="Textblatt l. 13.docx" target="_blank">📝 Textblatt</a></div>
+        </div>
+        <div style="padding:10px 0; font-size:0.82rem;"><div class="section-label" style="margin-top:4px">Auswertung AB 11</div>
+          <a class="ab-link pdf" href="AB 11a Orakel-Profil.pdf" target="_blank">📄 11a Profil</a>
+          <div style="margin-top:6px"><a class="ab-link pdf" href="AB 11b Wahr oder falsch.pdf" target="_blank">📄 11b W/F</a></div>
+          <div style="margin-top:6px"><a class="ab-link pdf" href="AB 11c Zeitstrahl.pdf" target="_blank">📄 11c Zeitstrahl</a></div>
+          <div style="margin-top:6px"><a class="ab-link pdf" href="AB 11d Innerer Monolog.pdf" target="_blank">📄 11d Monolog</a></div>
+        </div>
+        <div style="padding:10px 0; font-size:0.82rem;"><div class="section-label" style="margin-top:4px">Lösungen</div>
+          <a class="ab-link lsg" href="AB 11a Orakel-Profil Lösung.pdf" target="_blank">✓ 11a Lsg.</a>
+          <div style="margin-top:6px"><a class="ab-link lsg" href="AB 11b Wahr oder falsch Lösung.pdf" target="_blank">✓ 11b Lsg.</a></div>
+          <div style="margin-top:6px"><a class="ab-link lsg" href="AB 11c Zeitstrahl Lösung.pdf" target="_blank">✓ 11c Lsg.</a></div>
+          <div style="margin-top:6px"><a class="ab-link docx" href="Test Futur Bilderegel Lösung.docx" target="_blank">✓ Test Lsg.</a></div>
+        </div>
+        <div style="padding:10px 0; font-size:0.82rem;"><div class="section-label" style="margin-top:4px">Reflexion & Test</div>
+          <a class="ab-link pdf" href="Umfrage_Reflexion_Einheit.pdf" target="_blank">📄 Reflexion</a>
+          <div style="margin-top:6px"><a class="ab-link docx" href="Test Futur Bilderegel.docx" target="_blank">📝 Test</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ─── PHASE TOGGLE ────────────────────────────────────────
+function togglePhase(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+// ─── FORTSCHRITT ─────────────────────────────────────────
+const KEY = 'latein_l13_progress';
+
+function loadProgress() {
+  try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
+}
+function saveProgress(data) {
+  localStorage.setItem(KEY, JSON.stringify(data));
+}
+
+function updateCheck(checkbox, id) {
+  const data = loadProgress();
+  data[id] = checkbox.checked;
+  saveProgress(data);
+  const item = document.querySelector(`[data-id="${id}"]`);
+  if (item) item.classList.toggle('done', checkbox.checked);
+  updateProgressBar();
+  updatePhaseProgress();
+}
+
+function updateProgressBar() {
+  const all = document.querySelectorAll('.ab-check');
+  const done = document.querySelectorAll('.ab-check:checked');
+  const pct = all.length ? (done.length / all.length * 100) : 0;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = `${done.length} / ${all.length}`;
+}
+
+function updatePhaseProgress() {
+  ['ph0','ph1','ph2','ph3','ph4','ph5'].forEach(phId => {
+    const card = document.getElementById(phId);
+    if (!card) return;
+    const all = card.querySelectorAll('.ab-check');
+    const done = card.querySelectorAll('.ab-check:checked');
+    const el = document.getElementById('prog-' + phId);
+    if (el && all.length) {
+      el.textContent = `${done.length} von ${all.length} erledigt`;
+    }
+  });
+}
+
+function resetProgress() {
+  if (!confirm('Fortschritt wirklich zurücksetzen?')) return;
+  localStorage.removeItem(KEY);
+  document.querySelectorAll('.ab-check').forEach(cb => cb.checked = false);
+  document.querySelectorAll('.ab-item').forEach(item => item.classList.remove('done'));
+  updateProgressBar();
+  updatePhaseProgress();
+}
+
+function restoreProgress() {
+  const data = loadProgress();
+  document.querySelectorAll('[data-id]').forEach(item => {
+    const id = item.dataset.id;
+    const cb = item.querySelector('.ab-check');
+    if (cb && data[id]) {
+      cb.checked = true;
+      item.classList.add('done');
+    }
+  });
+  updateProgressBar();
+  updatePhaseProgress();
+}
+
+// ─── LEHRER / SCHÜLER ANSICHT ────────────────────────────
+function setView(mode) {
+  document.body.classList.toggle('lehrer-modus', mode === 'lehrer');
+  document.getElementById('btnLehrer').classList.toggle('active', mode === 'lehrer');
+  document.getElementById('btnSchueler').classList.toggle('active', mode === 'schueler');
+  localStorage.setItem('latein_l13_view', mode);
+}
+
+// ─── INIT ────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  restoreProgress();
+  const savedView = localStorage.getItem('latein_l13_view') || 'schueler';
+  setView(savedView);
+  // Erste Phase offen lassen, Rest zu
+  ['ph1','ph2','ph3','ph4','ph5','phMat'].forEach(id => {
+    const card = document.getElementById(id);
+    if (card) card.classList.remove('open');
+  });
+  document.getElementById('ph0').classList.add('open');
+});
+</script>
+</body>
+</html>
