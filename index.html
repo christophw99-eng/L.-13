@@ -500,15 +500,15 @@
     <div class="progress-bar-inner" id="progressBar"></div>
   </div>
   <span class="progress-count" id="progressCount">0 / 0</span>
-  <button class="reset-btn" onclick="resetProgress()">Zurücksetzen</button>
+  <button class="reset-btn" id="btnReset">Zurücksetzen</button>
 </div>
 
 <main>
 
   <!-- VIEW TOGGLE -->
   <div class="view-toggle">
-    <button class="view-btn active" id="btnSchueler" onclick="setView('schueler')">👨‍🎓 Schüleransicht</button>
-    <button class="view-btn" id="btnLehrer" onclick="setView('lehrer')">👨‍🏫 Lehreransicht</button>
+    <button class="view-btn active" id="btnSchueler">👨‍🎓 Schüleransicht</button>
+    <button class="view-btn" id="btnLehrer">👨‍🏫 Lehreransicht</button>
   </div>
 
   <!-- LEITFRAGE PANEL -->
@@ -531,7 +531,7 @@
        PHASE 0: EINSTIEG
   ══════════════════════════════════════════════════════════ -->
   <div class="phase-card ph0 open" id="ph0">
-    <div class="phase-header" onclick="togglePhase('ph0')">
+    <div class="phase-header">
       <div class="phase-num">✦</div>
       <div class="phase-title-block">
         <div class="phase-title">Einstieg in die Einheit</div>
@@ -544,7 +544,7 @@
       <div class="ab-grid">
         <div class="ab-item" data-id="e1">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'e1')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">Lernplan ausgeteilt</div>
               <div class="ab-sub">Schüler erhalten ihren persönlichen Laufzettel</div>
@@ -556,7 +556,7 @@
         </div>
         <div class="ab-item" data-id="e2">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'e2')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">Leitfrage eingeführt</div>
               <div class="ab-sub">Bild eines Auguren zeigen · Vorwissen aktivieren · Freiarbeit erklären</div>
@@ -565,7 +565,7 @@
         </div>
         <div class="ab-item" data-id="e3">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'e3')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 0: Aufgabenblatt + Auswertung</div>
               <div class="ab-sub">Erste Analyse neuer Formen – Entdeckungsaufgabe</div>
@@ -587,7 +587,7 @@
        PHASE 1: ENTDECKUNG – DAS FUTUR ERARBEITEN
   ══════════════════════════════════════════════════════════ -->
   <div class="phase-card ph1" id="ph1">
-    <div class="phase-header" onclick="togglePhase('ph1')">
+    <div class="phase-header">
       <div class="phase-num">I</div>
       <div class="phase-title-block">
         <div class="phase-title">Alles neu??? – Die Erkundung</div>
@@ -601,7 +601,7 @@
       <div class="ab-grid">
         <div class="ab-item" data-id="ab1">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab1')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 1: Hodie</div>
               <div class="ab-sub">Präsensformen erkennen und verstehen</div>
@@ -613,7 +613,7 @@
         </div>
         <div class="ab-item" data-id="ab2">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab2')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 2: Cras</div>
               <div class="ab-sub">Futurformen entdecken und vergleichen</div>
@@ -625,7 +625,7 @@
         </div>
         <div class="ab-item" data-id="ab3a">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab3a')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 3a: Sicherung – Weg A</div>
               <div class="ab-sub">Für Schüler, die schneller voranschreiten</div>
@@ -637,7 +637,7 @@
         </div>
         <div class="ab-item" data-id="ab3b">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab3b')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 3b: Sicherung – Weg B</div>
               <div class="ab-sub">Geführtere Sicherung mit mehr Unterstützung</div>
@@ -668,7 +668,7 @@
       <div class="ab-grid">
         <div class="ab-item" data-id="ab4">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab4')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 4: Grammatik-Einführung Futur I</div>
               <div class="ab-sub">Erhalten vom Grammaticus nach Besuch 1</div>
@@ -680,7 +680,7 @@
         </div>
         <div class="ab-item" data-id="ab5">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab5')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 5: Zeig, was Du kannst!</div>
               <div class="ab-sub">Futurübung Trainingslager – Selbstkontrolle</div>
@@ -692,7 +692,7 @@
         </div>
         <div class="ab-item" data-id="verbarium">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'verbarium')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">Verbarium</div>
               <div class="ab-sub">Verbformen üben und stempeln</div>
@@ -723,7 +723,7 @@
        PHASE 2: VORBEREITUNG DES ORAKELS
   ══════════════════════════════════════════════════════════ -->
   <div class="phase-card ph2" id="ph2">
-    <div class="phase-header" onclick="togglePhase('ph2')">
+    <div class="phase-header">
       <div class="phase-num">II</div>
       <div class="phase-title-block">
         <div class="phase-title">Ab zum Orakel – Vorbereitung ist alles!</div>
@@ -736,7 +736,7 @@
       <div class="ab-grid">
         <div class="ab-item" data-id="ab6">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab6')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 6: Vokabeldomino</div>
               <div class="ab-sub">Wortschatz L. 13 – „Rede des Aeneas"</div>
@@ -751,7 +751,7 @@
         </div>
         <div class="ab-item" data-id="ab7">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab7')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 7: Grammatikvorbereitung</div>
               <div class="ab-sub">Vorbereitung der Übersetzung – Grammatik-Wiederholung</div>
@@ -763,7 +763,7 @@
         </div>
         <div class="ab-item" data-id="ab8">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab8')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 8: Eigener Arbeitsplatz ordnen</div>
               <div class="ab-sub">Alle Materialien sortieren → Foto an Grammaticus schicken!</div>
@@ -784,7 +784,7 @@
        PHASE 3: DAS ORAKEL ENTSCHLÜSSELN
   ══════════════════════════════════════════════════════════ -->
   <div class="phase-card ph3" id="ph3">
-    <div class="phase-header" onclick="togglePhase('ph3')">
+    <div class="phase-header">
       <div class="phase-num">III</div>
       <div class="phase-title-block">
         <div class="phase-title">Das Orakel entschlüsseln</div>
@@ -798,7 +798,7 @@
       <div class="ab-grid">
         <div class="ab-item" data-id="ab9a">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab9a')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 9: Übersetzung (ohne Hilfen)</div>
               <div class="ab-sub">Für Schüler, die selbstständig übersetzen können</div>
@@ -811,7 +811,7 @@
         </div>
         <div class="ab-item" data-id="ab9b">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab9b')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 9: Übersetzung (wenig Hilfen)</div>
               <div class="ab-sub">Mit Vokabelangaben und Konstruktionshilfen</div>
@@ -824,7 +824,7 @@
         </div>
         <div class="ab-item" data-id="textblatt">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'textblatt')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">Textblatt L. 13</div>
               <div class="ab-sub">Lateinischer Originaltext</div>
@@ -848,7 +848,7 @@
       <div class="ab-grid">
         <div class="ab-item" data-id="ab10">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab10')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 10: Übersetzungsvergleich</div>
               <div class="ab-sub">Eigene Übersetzung mit anderen vergleichen und verbessern</div>
@@ -867,7 +867,7 @@
        PHASE 4: DAS ORAKEL VERSTEHEN
   ══════════════════════════════════════════════════════════ -->
   <div class="phase-card ph4" id="ph4">
-    <div class="phase-header" onclick="togglePhase('ph4')">
+    <div class="phase-header">
       <div class="phase-num">IV</div>
       <div class="phase-title-block">
         <div class="phase-title">Das Orakel verstehen</div>
@@ -881,7 +881,7 @@
       <div class="ab-grid">
         <div class="ab-item" data-id="ab11a">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab11a')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 11a: Orakel-Profil</div>
               <div class="ab-sub">Profil des Orakels / der Prophezeiung erstellen</div>
@@ -894,7 +894,7 @@
         </div>
         <div class="ab-item" data-id="ab11b">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab11b')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 11b: Wahr oder falsch?</div>
               <div class="ab-sub">Aussagen zum Text überprüfen und begründen</div>
@@ -907,7 +907,7 @@
         </div>
         <div class="ab-item" data-id="ab11c">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab11c')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 11c: Zeitstrahl</div>
               <div class="ab-sub">Prophezeiungen in einen Zeitstrahl einordnen</div>
@@ -920,7 +920,7 @@
         </div>
         <div class="ab-item" data-id="ab11d">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'ab11d')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">AB 11d: Innerer Monolog</div>
               <div class="ab-sub">Kreatives Schreiben – Gedanken des Aeneas nach dem Orakel</div>
@@ -941,7 +941,7 @@
        PHASE 5: ABSCHLUSS
   ══════════════════════════════════════════════════════════ -->
   <div class="phase-card ph5" id="ph5">
-    <div class="phase-header" onclick="togglePhase('ph5')">
+    <div class="phase-header">
       <div class="phase-num">V</div>
       <div class="phase-title-block">
         <div class="phase-title">Sprich zu deinen Gefährten!</div>
@@ -954,7 +954,7 @@
       <div class="ab-grid">
         <div class="ab-item" data-id="praes">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'praes')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">Antwort auf die Leitfrage präsentieren</div>
               <div class="ab-sub">Kurze Präsentation, Plakat oder strukturierter Hefteintrag</div>
@@ -963,7 +963,7 @@
         </div>
         <div class="ab-item" data-id="reflexion">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'reflexion')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">Reflexion & Feedback</div>
               <div class="ab-sub">Lernprozess reflektieren · Selbst- und Peerevaluation</div>
@@ -975,7 +975,7 @@
         </div>
         <div class="ab-item" data-id="test">
           <div class="ab-check-row">
-            <input type="checkbox" class="ab-check" onchange="updateCheck(this,'test')">
+            <input type="checkbox" class="ab-check">
             <div class="ab-text">
               <div class="ab-title">Test: Futur Bilderegel</div>
               <div class="ab-sub">Optionale Lernkontrolle</div>
@@ -998,7 +998,7 @@
        ALLE MATERIALIEN (ÜBERSICHT)
   ══════════════════════════════════════════════════════════ -->
   <div class="phase-card" id="phMat" style="border-color: rgba(201,164,77,0.5);">
-    <div class="phase-header" onclick="togglePhase('phMat')" style="border-left: 5px solid var(--gold);">
+    <div class="phase-header" style="border-left: 5px solid var(--gold);">
       <div class="phase-num" style="background: #6B5B10; font-size: 1rem;">📂</div>
       <div class="phase-title-block">
         <div class="phase-title">Alle Materialien – Schnellzugriff</div>
@@ -1063,9 +1063,11 @@ function togglePhase(id) {
   var card = document.getElementById(id);
   if (!card) return;
   var body = card.querySelector('.phase-body');
-  var arrow = card.querySelector('.phase-toggle');
   if (!body) return;
-  if (body.style.display === 'block') {
+  var arrow = card.querySelector('.phase-toggle');
+  // getComputedStyle liest den tatsächlichen Wert (egal ob CSS oder inline)
+  var isOpen = (window.getComputedStyle(body).display !== 'none');
+  if (isOpen) {
     body.style.display = 'none';
     card.classList.remove('open');
     if (arrow) arrow.style.transform = '';
@@ -1124,4 +1126,152 @@ function isPhaseComplete(phId) {
   var card = document.getElementById(phId);
   if (!card) return true;
   var all = card.querySelectorAll('.ab-check');
-  if (!all.length) return
+  if (!all.length) return true;
+  return card.querySelectorAll('.ab-check:checked').length === all.length;
+}
+
+function updateLocks() {
+  var lehrerModus = document.body.classList.contains('lehrer-modus');
+
+  for (var i = 0; i < PHASE_ORDER.length; i++) {
+    var phId = PHASE_ORDER[i];
+    var card = document.getElementById(phId);
+    if (!card) continue;
+
+    var phaseUnlocked = lehrerModus || i === 0 || isPhaseComplete(PHASE_ORDER[i - 1]);
+
+    var hint = card.querySelector('.unlock-hint');
+    if (!phaseUnlocked) {
+      if (!hint) {
+        hint = document.createElement('div');
+        hint.className = 'unlock-hint';
+        var tb = card.querySelector('.phase-title-block');
+        if (tb) tb.appendChild(hint);
+      }
+      hint.textContent = '🔒 Erst freigegeben wenn Phase ' + i + ' vollständig ist';
+    } else {
+      if (hint) hint.parentNode.removeChild(hint);
+    }
+
+    var items = card.querySelectorAll('[data-id]');
+    for (var j = 0; j < items.length; j++) {
+      var cb = items[j].querySelector('.ab-check');
+      if (!cb) continue;
+      var disable;
+      if (lehrerModus) {
+        disable = false;
+      } else if (!phaseUnlocked) {
+        disable = true;
+      } else {
+        if (j === 0) {
+          disable = false;
+        } else {
+          var prevCb = items[j - 1].querySelector('.ab-check');
+          disable = prevCb ? !prevCb.checked : false;
+        }
+      }
+      cb.disabled = disable;
+      if (disable && !cb.checked) {
+        items[j].classList.add('item-locked');
+      } else {
+        items[j].classList.remove('item-locked');
+      }
+    }
+  }
+}
+
+function resetProgress() {
+  if (!confirm('Fortschritt wirklich zurücksetzen?')) return;
+  try { localStorage.removeItem(KEY); } catch(e) {}
+  var cbs = document.querySelectorAll('.ab-check');
+  for (var i = 0; i < cbs.length; i++) { cbs[i].checked = false; }
+  var its = document.querySelectorAll('.ab-item');
+  for (var i = 0; i < its.length; i++) { its[i].classList.remove('done'); }
+  updateProgressBar();
+  updatePhaseProgress();
+  updateLocks();
+}
+
+function restoreProgress() {
+  var data = loadProgress();
+  var items = document.querySelectorAll('[data-id]');
+  for (var i = 0; i < items.length; i++) {
+    var id = items[i].dataset.id;
+    var cb = items[i].querySelector('.ab-check');
+    if (cb && data[id]) {
+      cb.checked = true;
+      items[i].classList.add('done');
+    }
+  }
+  updateProgressBar();
+  updatePhaseProgress();
+  updateLocks();
+}
+
+function setView(mode) {
+  document.body.classList.toggle('lehrer-modus', mode === 'lehrer');
+  document.getElementById('btnLehrer').classList.toggle('active', mode === 'lehrer');
+  document.getElementById('btnSchueler').classList.toggle('active', mode === 'schueler');
+  try { localStorage.setItem('latein_l13_view', mode); } catch(e) {}
+  updateLocks();
+}
+
+// ─── INIT ────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Event-Listener für alle Phase-Header (statt onclick-Attributen)
+  var headers = document.querySelectorAll('.phase-header');
+  for (var h = 0; h < headers.length; h++) {
+    (function(hdr) {
+      hdr.addEventListener('click', function() {
+        var card = hdr.parentElement;
+        if (card) togglePhase(card.id);
+      });
+    })(headers[h]);
+  }
+
+  // Event-Listener für View-Buttons und Reset
+  var btnS = document.getElementById('btnSchueler');
+  var btnL = document.getElementById('btnLehrer');
+  var btnR = document.getElementById('btnReset');
+  if (btnS) btnS.addEventListener('click', function() { setView('schueler'); });
+  if (btnL) btnL.addEventListener('click', function() { setView('lehrer'); });
+  if (btnR) btnR.addEventListener('click', resetProgress);
+
+  // Event-Listener für alle Häkchen (statt onchange-Attributen)
+  var cbs = document.querySelectorAll('.ab-check');
+  for (var c = 0; c < cbs.length; c++) {
+    (function(cb) {
+      cb.addEventListener('change', function() {
+        var item = cb.closest('[data-id]');
+        if (item) updateCheck(cb, item.dataset.id);
+      });
+    })(cbs[c]);
+  }
+
+  // Alle Phasen schließen, dann Phase 0 öffnen
+  var allCards = document.querySelectorAll('.phase-card');
+  for (var i = 0; i < allCards.length; i++) {
+    var body = allCards[i].querySelector('.phase-body');
+    var arrow = allCards[i].querySelector('.phase-toggle');
+    if (body) body.style.display = 'none';
+    allCards[i].classList.remove('open');
+    if (arrow) arrow.style.transform = '';
+  }
+  var ph0 = document.getElementById('ph0');
+  if (ph0) {
+    var ph0body = ph0.querySelector('.phase-body');
+    var ph0arrow = ph0.querySelector('.phase-toggle');
+    if (ph0body) ph0body.style.display = 'block';
+    ph0.classList.add('open');
+    if (ph0arrow) ph0arrow.style.transform = 'rotate(180deg)';
+  }
+
+  var savedView = 'schueler';
+  try { savedView = localStorage.getItem('latein_l13_view') || 'schueler'; } catch(e) {}
+  setView(savedView);
+  restoreProgress();
+});
+</script>
+</body>
+</html>
